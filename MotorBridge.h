@@ -10,13 +10,11 @@ class MotorBridge
     void begin();
     int getSpeed();
     void setSpeed(int speed);
-    bool getDirection();
   
   private:
-    Motor _motor1, _motor2;
+    Motor _motor1;
     int _pin1, _pin2;
     int _speed;
-    bool _direction;
 };
 
 #endif

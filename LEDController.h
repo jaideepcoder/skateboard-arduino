@@ -7,19 +7,15 @@
 class LEDController
 {
   public:
-    LEDController(int pin1, int pin2, int pin3, int pin4, int ldrpin);
+    LEDController(int pin1, int pin2);
     void begin();
-    int getAmbientLight();
-    void setAcceleration(int accel);
-    int getSpeedDifferential();
-    void setIntensity(int orientation);
+    void IncreaseRedLEDIntensity();
+    void DecreaseRedLEDIntensity();
+    void setWhiteLevel(int intensity);
     
   private:
-    bool _orientation;
-    int _intensity;
-    int _pin1, _pin2, _pin3, _pin4, _ldrpin, _axcelpin;
+    int _redlevel, _whitelevel;
+    int _pin1, _pin2, _ldrpin;
     LEDBridge _red, _white;
-    int _accel;
-  
 };
 #endif

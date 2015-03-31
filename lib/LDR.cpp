@@ -17,12 +17,6 @@ int LDR::getSensorInput()
 
 int LDR::getAmbientLight()
 {
-  int light = constrain(getSensorInput(), LDR_MIN, LDR_MAX);
-  return light;
-}
-
-int LDR::getLEDLevel()
-{
-  int light = map(getAmbientLight(), LDR_MIN, LDR_MAX, 255, 0);
+  int light = map(constrain(getSensorInput(), MIN, MAX), MIN, MAX, 255, 0);
   return light;
 }
