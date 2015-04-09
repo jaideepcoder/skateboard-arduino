@@ -1,3 +1,20 @@
+//  An arduino program to operate a mobile controlled skateboard implemented in Arduino language and Object Oriented C++.
+//  v1.0
+//  See complete license at:
+//  github.com/jaideepcoder/skateboard-arduino/blob/master/LICENCE
+//  
+//  Copyright (C) 2015 Jaideep Bhoosreddy
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+//  GNU General Public License for more details.
+//  You should have received a copy of the GNU General Public License
+//  along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 #include "LDR.h"
 
 LDR::LDR(int pin)
@@ -15,14 +32,14 @@ int LDR::getSensorInput()
   return analogRead(_pin);
 }
 
-int LDR::getAmbientLight()
+boolean LDR::getAmbientLight()
 {
-  int light = constrain(getSensorInput(), LDR_MIN, LDR_MAX);
-  return light;
+  if(getSensorInput() == 0) return LOW;
+  else return HIGH;
 }
 
-int LDR::getLEDLevel()
+boolean LDR::getLEDLevel()
 {
-  int light = map(getAmbientLight(), LDR_MIN, LDR_MAX, 255, 0);
-  return light;
+  if(getAmbientLight() == HIGH) return LOW;
+  else return HIGH;
 }

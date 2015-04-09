@@ -24,18 +24,18 @@ void MotorController::setSpeedAngle(int speed, int angle)
 {
   _speed = speed;
   _angle = angle;
-  constrain(_speed, DIGITAL_PIN_MIN, DIGITAL_PIN_MAX);
-  constrain(_angle, DIGITAL_PIN_MIN, DIGITAL_PIN_MAX);
+  _speed = constrain(_speed, DIGITAL_PIN_MIN, DIGITAL_PIN_MAX);
+  _angle = constrain(_angle, DIGITAL_PIN_MIN, DIGITAL_PIN_MAX);
   
   //_speed = map(_speed, 0, 255, 63, 255);//Maps voltage for minimum 6V for DC Motor
   _angle = map(_angle, -255, 255, -_speed, _speed);
   if(abs(_speed)==_speed) {
-    _left.setSpeed(_speed+_angle);
-    _right.setSpeed(_speed-_angle);
+    _left.setSpeed(constrain(_speed+_angle, DIGITAL_PIN_MIN, DIGITAL_PIN_MAX));
+    _right.setSpeed(constrain(_speed-_angle, DIGITAL_PIN_MIN, DIGITAL_PIN_MAX));
   }
   else {
-    _right.setSpeed(_speed+_angle);
-    _left.setSpeed(_speed-_angle);
+    _right.setSpeed(constrain(_speed+_angle, DIGITAL_PIN_MIN, DIGITAL_PIN_MAX));
+    _left.setSpeed(constrain(_speed-_angle, DIGITAL_PIN_MIN, DIGITAL_PIN_MAX));
   }
 }
 
