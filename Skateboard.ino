@@ -35,6 +35,7 @@
 #define LIGHT  'i'
 #define NLIGHT 'n'
 #define EMPTY  'e'
+#define CENTER 90
 
 //Digital IC Pins
 //Analog Pins
@@ -59,7 +60,8 @@ void setup()
   if(DEBUG) Serial.begin(9600);
   HC05.begin(9600);
   direction.attach(5);
-  if(DEBUG) HC05.println("Bluetooth On ");
+  direction.write(CENTER);
+  if(DEBUG) Serial.println("Bluetooth On ");
   if(DEBUG) Serial.println("Bluetooth Connection Established Successfully");
   locomotor.begin();
   distancer.begin();
@@ -73,6 +75,7 @@ void loop()
 {
   // Executes every 100 cycle //
   if(cycle%100==0) {
+    
     // Read data from HC05 Bluetooth Module //
     if(HC05.available()) {
       button = HC05.read();
@@ -113,7 +116,7 @@ void loop()
    
     // Control Logic for Servo Motor // 
     if(speed != 0) servoAngle = map(angle, -255, +255, -30, +30);
-    direction.write(servoAngle);
+    direction.write(CENTER + servoAngle);
     
     locomotor.setSpeedAngle(speed, angle);
   }
